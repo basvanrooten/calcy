@@ -1,0 +1,45 @@
+{
+  "name": "calcy",
+  "version": "1.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varundevpro/calcy.git"
+  },
+  "description": "A Calculator app built with electron.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package-win32": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.CompanyName=\"Calcy\"",
+    "package-mac": "electron-packager . --overwrite --asar=true --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . calcy --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Calcy App\"",
+    "package-linux": "electron-packager . calcy-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds",
+    "create-installer-mac": "electron-installer-dmg ./release-builds/Calcy\\ app-darwin-x64/Calcy\\ app.app calcy-app --out=release-builds --overwrite --icon=assets/icons/mac/icon.icns",
+    "create-installer-win": "node installers/windows/createinstaller.js",
+    "create-debian-installer": "electron-installer-debian --src release-builds/calcy-app-linux-x64/ --arch amd64 --config debian.json",
+
+    "postinstall": "electron-builder install-app-deps",
+    "dist": "build",
+    "build": "electron-builder -wml",
+    "build-win": "electron-builder -w",
+    "build-mac": "electron-builder -m",
+    "build-linux": "electron-builder -l"
+  },
+  "author": {
+    "name": "Varun A🔥",
+    "url": "https://github.com/varundevpro"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.7.11",
+    "electron-packager": "^10.1.1",
+    "electron-builder": "^19.46.3"
+  },
+  "build": {
+    "directories": {
+      "buildResources": "assets/images/build"
+    },
+    "linux": {
+      "category": "Utility"
+    }
+  }
+}
